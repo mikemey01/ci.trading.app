@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ci.trading.app", "ci.trading.app\ci.trading.app.csproj", "{C448FFDF-2C13-440D-9A7A-EDCE60B2DD42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ci.trading.service", "ci.trading.service\ci.trading.service.csproj", "{C896EC28-E704-4183-A402-550FBB69E5CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C448FFDF-2C13-440D-9A7A-EDCE60B2DD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C448FFDF-2C13-440D-9A7A-EDCE60B2DD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C448FFDF-2C13-440D-9A7A-EDCE60B2DD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C448FFDF-2C13-440D-9A7A-EDCE60B2DD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C896EC28-E704-4183-A402-550FBB69E5CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C896EC28-E704-4183-A402-550FBB69E5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C896EC28-E704-4183-A402-550FBB69E5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C896EC28-E704-4183-A402-550FBB69E5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8355D592-67F4-4349-BD4E-4E90B289D6A5}
+	EndGlobalSection
+EndGlobal
