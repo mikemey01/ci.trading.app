@@ -17,9 +17,12 @@ namespace ci.trading.app
         {
             Console.WriteLine("Hello World!");
 
+            // setup logging
             var services = new ServiceCollection()
                                .AddLogging();
 
+            // setup DI container
+            // this will scan the .app and .service assemblies for interface/implementation.
             var container = new Container();
             container.Configure(config =>
             {
@@ -34,11 +37,13 @@ namespace ci.trading.app
                 config.Populate(services);
             });
 
+            // get an instance of the service provider.
             var serviceProvider = container.GetInstance<IServiceProvider>();
             var logger = serviceProvider.GetService<ILoggerFactory>()
                                         .CreateLogger<Program>();
             logger.LogDebug("Starting application");
 
+            // Entry point to the app
             var mainController = container.GetInstance<IMainController>();
             mainController.StartTrading();
 
