@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ci.trading.app", "ci.tradin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ci.trading.service", "ci.trading.service\ci.trading.service.csproj", "{C896EC28-E704-4183-A402-550FBB69E5CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ci.trading.models", "ci.trading.models\ci.trading.models.csproj", "{5C6521AC-C9E7-4F09-8422-3311249B0140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C896EC28-E704-4183-A402-550FBB69E5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C896EC28-E704-4183-A402-550FBB69E5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C896EC28-E704-4183-A402-550FBB69E5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6521AC-C9E7-4F09-8422-3311249B0140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6521AC-C9E7-4F09-8422-3311249B0140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6521AC-C9E7-4F09-8422-3311249B0140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6521AC-C9E7-4F09-8422-3311249B0140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

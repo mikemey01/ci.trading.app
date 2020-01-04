@@ -34,5 +34,8 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# secrets
+ci.trading.service/secrets.json
+
 # Visual Studio 2015
 .vs/
