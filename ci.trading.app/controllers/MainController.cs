@@ -27,7 +27,7 @@ namespace ci.trading.app.controllers
         public async Task StartTrading()
         {
             var accountInfo = await _accountService.GetAccountInfo();
-            _logger.LogInformation($"a test information: {_config.ApiLive}");
+            _logger.LogInformation($"a test information: {_config.ApiLiveEndpoint}");
         }
     }
 }

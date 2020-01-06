@@ -23,7 +23,8 @@ namespace ci.trading.service.api
 
         public async Task<string> GetAccountInfo()
         {
-            _logger.LogInformation($"in GetAccountInfo: {_config.ApiPaper}");
+            _logger.LogInformation($"Paper endpoint: {_config.ApiPaperEndpoint}");
+            _logger.LogInformation($"Paper key: {_config.ApiPaperKey}");
             return "Account info";
         }
     }

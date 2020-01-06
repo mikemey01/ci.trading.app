@@ -6,8 +6,10 @@ namespace ci.trading.models.app
 {
     public class AppSettings
     {
-        public string ApiPaper { get; set; }
-        public string ApiLive { get; set; }
+        public string ApiPaperEndpoint { get; set; }
+        public string ApiPaperKey { get; set; }
+        public string ApiLiveEndpoint { get; set; }
+        public string ApiLiveKey { get; set; }
 
         public AppSettings()
         {
