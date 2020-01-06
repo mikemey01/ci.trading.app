@@ -15,15 +15,9 @@ namespace ci.trading.app
         static AppSettings appSettings = new AppSettings();
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            // setup logging
+            // setup services
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection = ConfigureServices(serviceCollection);
-
-            
-            //ConfigurationBinder.Bind(configuration.GetSection("AppSettings"), appSettings);
-
-
 
             // setup DI container
             // this will scan the .app and .service assemblies for interface/implementation.
@@ -41,14 +35,9 @@ namespace ci.trading.app
                 config.Populate(serviceCollection);
             });
 
-            // get an instance of the service provider.
-            var serviceProvider = container.GetInstance<IServiceProvider>();
-
-            // Entry point to the app
+            // Entry point to the app for now
             var mainController = container.GetInstance<IMainController>();
             mainController.StartTrading();
-
-            //Console.WriteLine(appSettings.ApiPaper);
         }
 
         private static IServiceCollection ConfigureServices(IServiceCollection serviceCollection)
