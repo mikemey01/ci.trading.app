@@ -1,6 +1,6 @@
 ﻿using ci.trading.app.controllers;
+using ci.trading.models.app;
 using ci.trading.service.api;
-using ci.trading.service.app;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,10 +16,14 @@ namespace ci.trading.app
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-
             // setup logging
-            var services = new ServiceCollection()
-                               .AddLogging();
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection = ConfigureServices(serviceCollection);
+
+            
+            //ConfigurationBinder.Bind(configuration.GetSection("AppSettings"), appSettings);
+
+
 
             // setup DI container
             // this will scan the .app and .service assemblies for interface/implementation.
@@ -30,30 +34,42 @@ namespace ci.trading.app
                 config.Scan(_ =>
                 {
                     _.Assembly("ci.trading.service");
-                    _.AssemblyContainingType(typeof(Program));
+                    _.Assembly("ci.trading.app");
                     _.WithDefaultConventions();
                 });
                 // Populate the container using the service collection
-                config.Populate(services);
+                config.Populate(serviceCollection);
             });
 
             // get an instance of the service provider.
             var serviceProvider = container.GetInstance<IServiceProvider>();
-            var logger = serviceProvider.GetService<ILoggerFactory>()
-                                        .CreateLogger<Program>();
-            logger.LogDebug("Starting application");
 
             // Entry point to the app
             var mainController = container.GetInstance<IMainController>();
             mainController.StartTrading();
 
+            //Console.WriteLine(appSettings.ApiPaper);
+        }
+
+        private static IServiceCollection ConfigureServices(IServiceCollection serviceCollection)
+        {
+            // setup logging
+            serviceCollection.AddLogging(options =>
+            {
+                options.AddConsole();
+                options.AddDebug();
+            });
+            serviceCollection.AddOptions();
+
+
+            // setup AppSettings configuration
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             var configuration = builder.Build();
-            ConfigurationBinder.Bind(configuration.GetSection("AppSettings"), appSettings);
+            serviceCollection.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 
-            Console.WriteLine(appSettings.ApiPaper);
+            return serviceCollection;
         }
     }
 }
