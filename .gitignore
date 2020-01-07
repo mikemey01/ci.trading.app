@@ -36,7 +36,7 @@ msbuild.wrn
 
 # secrets
 ci.trading.service/secrets.json
-ci.trading.app/appsettings.json
+appsettings.json
 
 # Visual Studio 2015
 .vs/
