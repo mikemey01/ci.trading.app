@@ -37,7 +37,7 @@ namespace ci.trading.app
 
             // Entry point to the app for now
             var mainController = container.GetInstance<IMainController>();
-            mainController.StartTrading();
+            mainController.StartTrading().Wait();
         }
 
         private static IServiceCollection ConfigureServices(IServiceCollection serviceCollection)
