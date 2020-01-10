@@ -17,19 +17,20 @@ namespace ci.trading.service.api
     public class AccountService : IAccountService
     {
         private readonly ILogger<AccountService> _logger;
-        private readonly AppSettings _config;
+        private readonly AppSettings _appSettings;
         private const string ACCOUNT_URL = "https://api.tradeking.com/v1/accounts.json";
+
         public AccountService(
             ILogger<AccountService> logger,
-            IOptions<AppSettings> config)
+            IOptions<AppSettings> appSettings)
         {
             _logger = logger;
-            _config = config.Value;
+            _appSettings = appSettings.Value;
         }
 
         public async Task<AccountModel> CallApi(HttpClient httpClient)
         {
-            Utils.SetupApiCall(_config, ACCOUNT_URL, "GET", httpClient);
+            Utils.SetupApiCall(_appSettings, ACCOUNT_URL, "GET", httpClient);
             var accountModel = new AccountModel();
 
             try
