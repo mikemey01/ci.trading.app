@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ci.trading.app.controllers
+namespace ci.trading.service.controls
 {
-    public interface IMainController
+    public interface IEntryControl
     {
-        Task StartTrading();
+        Task StartResearch();
     }
 }

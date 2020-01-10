@@ -1,6 +1,6 @@
-﻿using ci.trading.app.controllers;
-using ci.trading.models.app;
+﻿using ci.trading.models.app;
 using ci.trading.service.api;
+using ci.trading.service.controls;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -36,8 +36,8 @@ namespace ci.trading.app
             });
 
             // Entry point to the app for now
-            var mainController = container.GetInstance<IMainController>();
-            mainController.StartTrading().Wait();
+            var entryControl = container.GetInstance<IEntryControl>();
+            entryControl.StartResearch().Wait();
         }
 
         private static IServiceCollection ConfigureServices(IServiceCollection serviceCollection)

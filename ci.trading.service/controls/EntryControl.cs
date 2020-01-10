@@ -4,29 +4,32 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ci.trading.app.controllers
+namespace ci.trading.service.controls
 {
-    public class MainController : IMainController
+    public class EntryControl : IEntryControl
     {
         private readonly IAccountService _accountService;
-        private readonly ILogger<MainController> _logger;
+        private readonly ILogger<EntryControl> _logger;
         private readonly AppSettings _config;
-        public MainController(
-            IAccountService accountService, 
-            ILogger<MainController> logger,
-            IOptions<AppSettings> config)
+        public EntryControl(
+            IAccountService accountService,
+            ILogger<EntryControl> logger,
+            IOptions<AppSettings> config
+            )
         {
             _accountService = accountService;
             _logger = logger;
             _config = config.Value;
         }
 
-        public async Task StartTrading()
+        public async Task StartResearch()
         {
-            var accountInfo = await _accountService.GetAccountInfo();
+            var httpClient = new HttpClient();
+            var accountInfo = await _accountService.CallApi(httpClient);
             _logger.LogInformation($"a test information: {_config.TokenKey}");
         }
     }
