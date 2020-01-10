@@ -1,2 +1,2 @@
 # ci.trading.app
-automated trading with alpaca
+automated trading with ally/tradeking
