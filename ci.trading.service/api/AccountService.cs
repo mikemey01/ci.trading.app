@@ -75,7 +75,7 @@ namespace ci.trading.service.api
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Error in AccountService.ParseResponse: {ex}");
+                _logger.LogError($"Error in AccountService.ParseResponse: {ex.ToString()}");
             }
 
             return accountModel;
