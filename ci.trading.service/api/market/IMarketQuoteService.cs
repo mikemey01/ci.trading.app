@@ -9,7 +9,7 @@ namespace ci.trading.service.api.market
 {
     public interface IMarketQuoteService
     {
-        Task<MarketQuoteModel> CallApi(HttpClient httpClient, List<string> symbolList);
-        MarketQuoteModel ParseResponse(string data);
+        Task<List<MarketQuoteModel>> CallApi(HttpClient httpClient, List<string> symbolList);
+        List<MarketQuoteModel> ParseResponse(string data);
     }
 }

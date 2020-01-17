@@ -40,7 +40,8 @@ namespace ci.trading.service.controls
             // var accountInfo = await _accountService.CallApi(httpClient);
             var listSymbols = new List<string>
             {
-                "F"
+                "F",
+                "AMD"
             };
             var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
             _logger.LogInformation($"a test information: {_config.TokenKey}");

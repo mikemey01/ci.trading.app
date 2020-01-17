@@ -3,6 +3,7 @@ using ci.trading.models.marketquote;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -26,43 +27,47 @@ namespace ci.trading.service.api.market
             _appSettings = appSettings.Value;
         }
 
-        public async Task<MarketQuoteModel> CallApi(HttpClient httpClient, List<string> symbolList)
+        public async Task<List<MarketQuoteModel>> CallApi(HttpClient httpClient, List<string> symbolList)
         {
             var symbolString = Utils.GetCommaStringFromList(symbolList);
             QUOTE_URL += symbolString;
             Utils.SetupApiCall(_appSettings, QUOTE_URL, "GET", httpClient);
-            var marketQuoteModel = new MarketQuoteModel();
+            var marketQuoteModels = new List<MarketQuoteModel>();
 
             try
             {
                 var response = await httpClient.GetAsync(QUOTE_URL);
                 var data = await response.Content.ReadAsStringAsync();
-                marketQuoteModel = ParseResponse(data);
+                marketQuoteModels = ParseResponse(data);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Error in MarketQuoteService.CallApi: {ex.ToString()}");
             }
 
-            return marketQuoteModel;
+            return marketQuoteModels;
         }
 
-        public MarketQuoteModel ParseResponse(string data)
+        public List<MarketQuoteModel> ParseResponse(string data)
         {
-            var marketQuoteModel = new MarketQuoteModel();
+            var marketQuoteModels = new List<MarketQuoteModel>();
             try
             {
                 dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
                 var response = dynamicResponse.response;
+                var quotes = response.quotes.quote;
+                foreach(var quote in quotes.Children())
+                {
+                    var test = quote; // START HERE
+                }
+                // var marketQuoteArray = JArray.Parse(quotes);
                 if(response.error == "Success")
                 {
-                    marketQuoteModel.ResponseId = response["@id"] ?? "";
 
                 }
                 else
                 {
-                    marketQuoteModel.IsSuccessful = false;
-                    marketQuoteModel.Error = response.error;
+
                 }
             }
             catch(Exception ex)
@@ -70,7 +75,7 @@ namespace ci.trading.service.api.market
                 _logger.LogError($"Error in MarketQuoteModel.ParseResponse: {ex.ToString()}");
             }
 
-            return marketQuoteModel;
+            return new List<MarketQuoteModel>();
         }
     }
         
