@@ -27,6 +27,12 @@ namespace ci.trading.service.api
 
             return httpClient;
         }
+
+        public static string GetCommaStringFromList(List<string> list)
+        {
+            var stringList = string.Join(",", list);
+            return stringList;
+        }
     }
 
 }

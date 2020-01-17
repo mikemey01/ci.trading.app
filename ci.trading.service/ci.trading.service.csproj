@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ci.trading.models\ci.trading.models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="api\orders\" />
+  </ItemGroup>
+
 </Project>

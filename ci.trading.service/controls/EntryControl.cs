@@ -1,5 +1,6 @@
 ﻿using ci.trading.models.app;
 using ci.trading.service.api;
+using ci.trading.service.api.market;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -14,19 +15,21 @@ namespace ci.trading.service.controls
     {
         private readonly IAccountService _accountService;
         private readonly IMarketClockService _clockService;
-
+        private readonly IMarketQuoteService _quoteService;
         private readonly ILogger<EntryControl> _logger;
         private readonly AppSettings _config;
 
         public EntryControl(
             IAccountService accountService,
             IMarketClockService clockService,
+            IMarketQuoteService quoteService,
             ILogger<EntryControl> logger,
             IOptions<AppSettings> config
             )
         {
             _accountService = accountService;
             _clockService = clockService;
+            _quoteService = quoteService;
             _logger = logger;
             _config = config.Value;
         }
@@ -35,7 +38,11 @@ namespace ci.trading.service.controls
         {
             var httpClient = new HttpClient();
             // var accountInfo = await _accountService.CallApi(httpClient);
-            var currentClock = await _clockService.CallApi(httpClient);
+            var listSymbols = new List<string>
+            {
+                "F"
+            };
+            var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
             _logger.LogInformation($"a test information: {_config.TokenKey}");
         }
     }
