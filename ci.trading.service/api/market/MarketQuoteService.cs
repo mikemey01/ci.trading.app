@@ -2,6 +2,7 @@
 using ci.trading.models.marketquote;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -40,7 +41,7 @@ namespace ci.trading.service.api.market
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error in AccountService.CallApi: {ex}");
+                _logger.LogError($"Error in MarketQuoteService.CallApi: {ex.ToString()}");
             }
 
             return marketQuoteModel;
@@ -48,7 +49,28 @@ namespace ci.trading.service.api.market
 
         public MarketQuoteModel ParseResponse(string data)
         {
-            return new MarketQuoteModel();
+            var marketQuoteModel = new MarketQuoteModel();
+            try
+            {
+                dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
+                var response = dynamicResponse.response;
+                if(response.error == "Success")
+                {
+                    marketQuoteModel.ResponseId = response["@id"] ?? "";
+
+                }
+                else
+                {
+                    marketQuoteModel.IsSuccessful = false;
+                    marketQuoteModel.Error = response.error;
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error in MarketQuoteModel.ParseResponse: {ex.ToString()}");
+            }
+
+            return marketQuoteModel;
         }
     }
         

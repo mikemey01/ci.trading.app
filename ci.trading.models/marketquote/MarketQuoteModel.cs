@@ -36,6 +36,7 @@ namespace ci.trading.models.marketquote
         public decimal PriorDayOpen { get; set; }
         public decimal PriorDayVolume { get; set; }
         public decimal SharesOutstanding { get; set; }
+        public string Symbol { get; set; }
         public decimal TradesSinceMarketOpen { get; set; }
         public string TrendTenTicks { get; set; }
         public decimal Volume { get; set; }

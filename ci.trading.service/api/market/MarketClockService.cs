@@ -38,7 +38,7 @@ namespace ci.trading.service.api
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error in AccountService.CallApi: {ex}");
+                _logger.LogError($"Error in MarketClockService.CallApi: {ex.ToString()}");
             }
 
             return marketClockModel;
