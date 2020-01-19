@@ -141,7 +141,7 @@ namespace ci.trading.service.api.market
                     BetaVolatility = quote.beta,
                     PreviousCandleClose = quote.cl,
                     Dividend = quote.div,
-                    DividendExDate = DateTime.Parse(quote.divexdate)
+                    DividendExDate = Utils.ParseYYYYMMDDDate(quote.divexdate.ToString())
                 };
 
                 return marketQuoteModel;
@@ -154,6 +154,7 @@ namespace ci.trading.service.api.market
 
             return new MarketQuoteModel();
         }
+
     }
         
 }

@@ -33,6 +33,24 @@ namespace ci.trading.service.api
             var stringList = string.Join(",", list);
             return stringList;
         }
+
+        public static DateTime? ParseYYYYMMDDDate(string date)
+        {
+            if (date.Length != 8) return null;
+
+            try
+            {
+                var year = date.Substring(0, 4);
+                var month = date.Substring(4, 2);
+                var day = date.Substring(6, 2);
+                var dateTime = new DateTime(Convert.ToInt32(date.Substring(0, 4)), Convert.ToInt32(date.Substring(4, 2)), Convert.ToInt32(date.Substring(6, 2)));
+                return dateTime;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
     }
 
 }
