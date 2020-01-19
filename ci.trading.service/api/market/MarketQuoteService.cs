@@ -141,7 +141,32 @@ namespace ci.trading.service.api.market
                     BetaVolatility = quote.beta,
                     PreviousCandleClose = quote.cl,
                     Dividend = quote.div,
-                    DividendExDate = Utils.ParseYYYYMMDDDate(quote.divexdate.ToString())
+                    DividendExDate = Utils.ParseYYYYMMDDDate(quote.divexdate.ToString()),
+                    EarningsPerShare = quote.eps,
+                    High = quote.hi,
+                    LastTradeVolume = quote.incr_vl,
+                    LastTradePrice = quote.last,
+                    Low = quote.lo,
+                    Name = quote.name,
+                    Open = quote.opn,
+                    PriorDayClose = quote.pcls,
+                    PriorDayHigh = quote.phi,
+                    PriorDayLow = quote.plo,
+                    PriorDayOpen = quote.popn,
+                    PriorDayVolume = quote.pvol,
+                    PriceEarnings = quote.pe,
+                    SharesOutstanding = quote.sho,
+                    Symbol = quote.symbol,
+                    TradesSinceMarketOpen = quote.tr_num,
+                    TrendTenTicks = quote.trend,
+                    Volume = quote.vl,
+                    VolatilityOneYear = quote.volatility12,
+                    VolumeWeightedAveragePrice = quote.vwap,
+                    High52Week = quote.wk52hi,
+                    High52WeekDate = Utils.ParseYYYYMMDDDate(quote.wk52hidate.ToString()),
+                    Low52Week = quote.wk52lo,
+                    Low52WeekDate = Utils.ParseYYYYMMDDDate(quote.wk52lodate.ToString()),
+                    DividendYieldAsPercent = quote.yield
                 };
 
                 return marketQuoteModel;

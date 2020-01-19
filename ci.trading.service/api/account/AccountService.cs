@@ -37,7 +37,7 @@ namespace ci.trading.service.api
             {
                 var response = await httpClient.GetAsync(ACCOUNT_URL);
                 var data = await response.Content.ReadAsStringAsync();
-                accountModel = await ParseResponse(data);
+                accountModel = ParseResponse(data);
             }
             catch(Exception ex)
             {
@@ -47,7 +47,7 @@ namespace ci.trading.service.api
             return accountModel;
         }
 
-        public async Task<AccountModel> ParseResponse(string data)
+        private AccountModel ParseResponse(string data)
         {
             var accountModel = new AccountModel();
             try

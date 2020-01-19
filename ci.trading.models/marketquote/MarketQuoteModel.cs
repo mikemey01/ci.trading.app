@@ -7,7 +7,6 @@ namespace ci.trading.models.marketquote
 {
     public class MarketQuoteModel : ApiBase
     {
-        public string QuoteType { get; set; }
         public decimal AverageDailyPrice100 { get; set; }
         public decimal AverageDailyPrice200 { get; set; }
         public decimal AverageDailyPrice50 { get; set; }
@@ -30,11 +29,11 @@ namespace ci.trading.models.marketquote
         public string Name { get; set; }
         public decimal Open { get; set; } // day open price
         public decimal PriorDayClose { get; set; }
-        public decimal PriceEarnings { get; set; }
         public decimal PriorDayHigh { get; set; }
         public decimal PriorDayLow { get; set; }
         public decimal PriorDayOpen { get; set; }
         public decimal PriorDayVolume { get; set; }
+        public decimal PriceEarnings { get; set; }
         public decimal SharesOutstanding { get; set; }
         public string Symbol { get; set; }
         public decimal TradesSinceMarketOpen { get; set; }

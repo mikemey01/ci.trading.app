@@ -10,6 +10,5 @@ namespace ci.trading.service.api
     public interface IAccountService
     {
         Task<AccountModel> CallApi(HttpClient httpClient);
-        Task<AccountModel> ParseResponse(string data);
     }
 }
