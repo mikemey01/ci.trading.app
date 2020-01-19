@@ -119,18 +119,40 @@ namespace ci.trading.service.api.market
                 _logger.LogError($"Error in MarketQuoteModel.ParseMultipleQuotes: {ex.ToString()}");
             }
 
-            return new List<MarketQuoteModel>();
+            return marketQuoteModels;
         }
 
         private MarketQuoteModel ParseQuote(dynamic quote)
         {
-            var marketQuoteModel = new MarketQuoteModel
+            try
             {
-                AverageDailyPrice100 = quote.adp_100,
-                AverageDailyPrice200 = quote.adp_200
-            };
+                var marketQuoteModel = new MarketQuoteModel
+                {
+                    AverageDailyPrice100 = quote.adp_100,
+                    AverageDailyPrice200 = quote.adp_200,
+                    AverageDailyPrice50 = quote.adp_50,
+                    AverageDailyVolume21 = quote.adv_21,
+                    AverageDailyVolume30 = quote.adv_30,
+                    AverageDailyVolume90 = quote.adv_90,
+                    AskPrice = quote.ask,
+                    AskSize = quote.asksz,
+                    BidPrice = quote.bid,
+                    BidSize = quote.bidsz,
+                    BetaVolatility = quote.beta,
+                    PreviousCandleClose = quote.cl,
+                    Dividend = quote.div,
+                    DividendExDate = DateTime.Parse(quote.divexdate)
+                };
 
-            return marketQuoteModel;
+                return marketQuoteModel;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error in MarketQuoteModel.ParseQuote: {ex.ToString()}");
+            }
+            
+
+            return new MarketQuoteModel();
         }
     }
         

@@ -16,7 +16,7 @@ namespace ci.trading.models.marketquote
         public decimal AverageDailyVolume90 { get; set; }
         public decimal AskPrice { get; set; }
         public decimal AskSize { get; set; } // in hundreds
-        public decimal Bid { get; set; }
+        public decimal BidPrice { get; set; }
         public decimal BidSize { get; set; } // in hundreds
         public decimal BetaVolatility { get; set; }
         public decimal PreviousCandleClose { get; set; }
