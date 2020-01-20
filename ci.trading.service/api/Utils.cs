@@ -51,6 +51,11 @@ namespace ci.trading.service.api
                 return null;
             }
         }
+
+        public static string GetStringDateTime(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+        }
     }
 
 }
