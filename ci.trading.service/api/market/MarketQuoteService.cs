@@ -100,7 +100,8 @@ namespace ci.trading.service.api.market
                 {
                     foreach (var quote in quotes.Children())
                     {
-                        var marketQuote = ParseQuote(quote); 
+                        var marketQuote = (MarketQuoteModel)ParseQuote(quote); 
+                        marketQuote.ResponseId = response["@id"] ?? "";
                         marketQuoteModels.Add(marketQuote);
                     }
                 }

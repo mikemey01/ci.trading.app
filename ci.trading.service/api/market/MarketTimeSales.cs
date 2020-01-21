@@ -2,6 +2,7 @@
 using ci.trading.models.markettimesales;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -46,7 +47,22 @@ namespace ci.trading.service.api.market
 
         private List<MarketCandle> ParseResponse(string data)
         {
-            return new List<MarketCandle>();
+            dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
+            var response = dynamicResponse.response;
+            var listCandles = new List<MarketCandle>();
+
+            try
+            {
+                
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+
+            return listCandles;
+
         }
     }
 }
