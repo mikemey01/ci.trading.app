@@ -47,17 +47,35 @@ namespace ci.trading.service.api.market
 
         private List<MarketCandle> ParseResponse(string data)
         {
-            dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
-            var response = dynamicResponse.response;
             var listCandles = new List<MarketCandle>();
 
             try
             {
-                
-            }
-            catch(Exception ex)
-            {
+                dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
+                var response = dynamicResponse.response;
+                if(response.error == "Success")
+                {
+                    var quotes = response.quotes.quote;
+                    foreach (var quote in quotes.Children())
+                    {
+                        var marketCandle = new MarketCandle
+                        {
+                            ResponseId = quote.ResponseId = response["@id"] ?? "",
+                            Date = quote.datetime,
+                            Open = quote.opn,
+                            High = quote.hi,
+                            Low = quote.lo,
+                            Last = quote.last,
+                            Volume = quote.vl
+                        };
+                        listCandles.Add(marketCandle);
+                    }
+                }
 
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in MarketTimeSales.ParseResponse: {ex.ToString()}");
             }
             
 
