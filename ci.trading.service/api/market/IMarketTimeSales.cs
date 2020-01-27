@@ -9,6 +9,6 @@ namespace ci.trading.service.api.market
 {
     public interface IMarketTimeSales
     {
-        Task<List<MarketCandle>> CallApi(HttpClient httpClient, string interval, string symbol, DateTime startDate);
+        Task<List<MarketDay>> CallApi(HttpClient httpClient, string interval, string symbol, DateTime startDate);
     }
 }

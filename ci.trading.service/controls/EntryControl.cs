@@ -50,7 +50,7 @@ namespace ci.trading.service.controls
             //var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
 
             var date = new DateTime(2020, 1, 10);
-            var timeSales = await _timeSalesService.CallApi(httpClient, "1min", "F", date);
+            var timeSales = await _timeSalesService.CallApi(httpClient, "5min", "F", date);
         }
     }
 }

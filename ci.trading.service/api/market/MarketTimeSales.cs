@@ -27,11 +27,11 @@ namespace ci.trading.service.api.market
             _appSettings = appSettings.Value;
         }
 
-        public async Task<List<MarketCandle>> CallApi(HttpClient httpClient, string interval, string symbol, DateTime startDate)
+        public async Task<List<MarketDay>> CallApi(HttpClient httpClient, string interval, string symbol, DateTime startDate)
         {
             var endpoint = $"{TIME_SALES_URL}symbols={symbol}&startdate={Utils.GetStringDateTime(startDate)}&interval={interval}";
             Utils.SetupApiCall(_appSettings, endpoint, "GET", httpClient);
-            var candleList = new List<MarketCandle>();
+            var candleList = new List<MarketDay>();
             try
             {
                 var response = await httpClient.GetAsync(endpoint);
@@ -46,7 +46,7 @@ namespace ci.trading.service.api.market
             return candleList;
         }
 
-        private List<MarketCandle> ParseResponse(string data, string interval)
+        private List<MarketDay> ParseResponse(string data, string interval)
         {
             var listCandles = new List<MarketCandle>();
 
@@ -78,22 +78,32 @@ namespace ci.trading.service.api.market
             {
                 _logger.LogError($"Error in MarketTimeSales.ParseResponse: {ex.ToString()}");
             }
-            MarketCandlesByDay(listCandles);
-            return listCandles;
+            var marketCandlesByDay = MarketCandlesByDay(listCandles);
+            return marketCandlesByDay;
         }
 
         private List<MarketDay> MarketCandlesByDay(List<MarketCandle> listCandles)
         {
             var listMarketDays = new List<MarketDay>();
+            var lastTradingTime = new TimeSpan(21, 00, 00); // used to filter out after hours trades
 
             if (listCandles.Count == 0)
                 return listMarketDays;
 
+            // get all the days we need to process
             var listDistinctDates = listCandles.Select(x => x.Date.Date).Distinct().ToList();
 
             foreach(var date in listDistinctDates)
             {
-                // iterate through dates here
+                var marketDay = new MarketDay
+                {
+                    Date = date,
+                    Candles = listCandles.FindAll(x => x.Date.Date == date && x.Date.TimeOfDay <= lastTradingTime), // filter for date/time-of-day
+                    interval = listCandles.First(x => x.Date.Date == date).Interval
+                };
+
+                // add to the list
+                listMarketDays.Add(marketDay);
             }
 
             return listMarketDays;
