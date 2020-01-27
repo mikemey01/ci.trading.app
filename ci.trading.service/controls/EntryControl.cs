@@ -1,4 +1,5 @@
 ﻿using ci.trading.models.app;
+using ci.trading.models.markettoplist;
 using ci.trading.service.api;
 using ci.trading.service.api.market;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,7 @@ namespace ci.trading.service.controls
         private readonly IMarketClockService _clockService;
         private readonly IMarketQuoteService _quoteService;
         private readonly IMarketTimeSalesService _timeSalesService;
+        private readonly IMarketTopListService _topListService;
         private readonly ILogger<EntryControl> _logger;
         private readonly AppSettings _config;
 
@@ -25,6 +27,7 @@ namespace ci.trading.service.controls
             IMarketClockService clockService,
             IMarketQuoteService quoteService,
             IMarketTimeSalesService timeSalesService,
+            IMarketTopListService topListService,
             ILogger<EntryControl> logger,
             IOptions<AppSettings> config
             )
@@ -33,6 +36,7 @@ namespace ci.trading.service.controls
             _clockService = clockService;
             _quoteService = quoteService;
             _timeSalesService = timeSalesService;
+            _topListService = topListService;
             _logger = logger;
             _config = config.Value;
         }
@@ -49,8 +53,19 @@ namespace ci.trading.service.controls
             //};
             //var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
 
-            var date = new DateTime(2020, 1, 10);
-            var timeSales = await _timeSalesService.CallApi(httpClient, "5min", "F", date);
+            //var date = new DateTime(2020, 1, 10);
+            //var timeSales = await _timeSalesService.CallApi(httpClient, "5min", "F", date);
+
+            var topList = await _topListService.CallApi(httpClient, TopListType.topgainers);
+            var bottomList = await _topListService.CallApi(httpClient, TopListType.toplosers, ExchangeType.Q);
+            var sb = new StringBuilder();
+
+            foreach (var item in bottomList)
+            {
+                sb.AppendLine($"Name: {item.CompanyName}({item.Symbol}), Percent decrease: {item.PercentChange}, last: {item.Last}");
+            }
+
+            _logger.LogInformation(sb.ToString());
         }
     }
 }

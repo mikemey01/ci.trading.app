@@ -74,6 +74,19 @@ namespace ci.trading.service.api.market
                         listCandles.Add(marketCandle);
                     }
                 }
+                else
+                {
+                    var marketDayError = new MarketDay
+                    {
+                        IsSuccessful = false,
+                        Error = response.error
+                    };
+
+                    var listMarketDayError = new List<MarketDay>();
+                    listMarketDayError.Add(marketDayError);
+
+                    return listMarketDayError;
+                }
             }
             catch (Exception ex)
             {

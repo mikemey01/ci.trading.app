@@ -9,6 +9,6 @@ namespace ci.trading.service.api.market
 {
     public interface IMarketTopListService
     {
-        Task<List<MarketTopList>> CallApi(HttpClient httpClient, TopListType topListType);
+        Task<List<MarketTopList>> CallApi(HttpClient httpClient, TopListType topListType, ExchangeType exchange = ExchangeType.N);
     }
 }

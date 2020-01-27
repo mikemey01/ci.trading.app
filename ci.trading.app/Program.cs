@@ -45,8 +45,11 @@ namespace ci.trading.app
             // setup logging
             serviceCollection.AddLogging(options =>
             {
-                options.AddConsole();
+                options.ClearProviders();
+                options.AddConsole(options => options.IncludeScopes = true);
                 options.AddDebug();
+                options.AddFilter("Microsoft", LogLevel.Warning);
+                options.AddFilter("System", LogLevel.Warning);
             });
             serviceCollection.AddOptions();
 
