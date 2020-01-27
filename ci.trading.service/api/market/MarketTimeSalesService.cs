@@ -32,6 +32,7 @@ namespace ci.trading.service.api.market
             var endpoint = $"{TIME_SALES_URL}symbols={symbol}&startdate={Utils.GetStringDateTime(startDate)}&interval={interval}";
             Utils.SetupApiCall(_appSettings, endpoint, "GET", httpClient);
             var candleList = new List<MarketDay>();
+
             try
             {
                 var response = await httpClient.GetAsync(endpoint);
