@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ci.trading.service.api.market
 {
-    public interface IMarketTimeSales
+    public interface IMarketTimeSalesService
     {
         Task<List<MarketDay>> CallApi(HttpClient httpClient, string interval, string symbol, DateTime startDate);
     }

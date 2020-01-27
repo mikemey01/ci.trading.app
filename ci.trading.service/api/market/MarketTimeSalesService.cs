@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace ci.trading.service.api.market
 {
-    public class MarketTimeSales : IMarketTimeSales
+    public class MarketTimeSalesService : IMarketTimeSalesService
     {
         private readonly ILogger<MarketQuoteService> _logger;
         private readonly AppSettings _appSettings;
         private string TIME_SALES_URL = "https://api.tradeking.com/v1/market/timesales.json?";
 
-        public MarketTimeSales(
+        public MarketTimeSalesService(
             ILogger<MarketQuoteService> logger,
             IOptions<AppSettings> appSettings
             )
@@ -38,7 +38,7 @@ namespace ci.trading.service.api.market
                 var data = await response.Content.ReadAsStringAsync();
                 candleList = ParseResponse(data, interval);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Error in MarketTimeSales.CallApi: {ex.ToString()}");
             }
@@ -54,7 +54,7 @@ namespace ci.trading.service.api.market
             {
                 dynamic dynamicResponse = JsonConvert.DeserializeObject(data);
                 var response = dynamicResponse.response;
-                if(response.error == "Success")
+                if (response.error == "Success")
                 {
                     var quotes = response.quotes.quote;
                     foreach (var quote in quotes.Children())
@@ -85,7 +85,7 @@ namespace ci.trading.service.api.market
         private List<MarketDay> MarketCandlesByDay(List<MarketCandle> listCandles)
         {
             var listMarketDays = new List<MarketDay>();
-            var lastTradingTime = new TimeSpan(21, 00, 00); // used to filter out after hours trades
+            var lastTradingTime = Utils.GetMarketCloseTime(); // used to filter out after hours trades
 
             if (listCandles.Count == 0)
                 return listMarketDays;
@@ -93,7 +93,7 @@ namespace ci.trading.service.api.market
             // get all the days we need to process
             var listDistinctDates = listCandles.Select(x => x.Date.Date).Distinct().ToList();
 
-            foreach(var date in listDistinctDates)
+            foreach (var date in listDistinctDates)
             {
                 var marketDay = new MarketDay
                 {

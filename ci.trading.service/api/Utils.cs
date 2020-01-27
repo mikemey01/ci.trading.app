@@ -56,6 +56,16 @@ namespace ci.trading.service.api
         {
             return date.ToString("yyyy-MM-dd");
         }
+
+        public static TimeSpan GetMarketOpenTime()
+        {
+            return new TimeSpan(14, 30, 00);
+        }
+
+        public static TimeSpan GetMarketCloseTime()
+        {
+            return new TimeSpan(21, 00, 00);
+        }
     }
 
 }

@@ -16,7 +16,7 @@ namespace ci.trading.service.controls
         private readonly IAccountService _accountService;
         private readonly IMarketClockService _clockService;
         private readonly IMarketQuoteService _quoteService;
-        private readonly IMarketTimeSales _timeSalesService;
+        private readonly IMarketTimeSalesService _timeSalesService;
         private readonly ILogger<EntryControl> _logger;
         private readonly AppSettings _config;
 
@@ -24,7 +24,7 @@ namespace ci.trading.service.controls
             IAccountService accountService,
             IMarketClockService clockService,
             IMarketQuoteService quoteService,
-            IMarketTimeSales timeSalesService,
+            IMarketTimeSalesService timeSalesService,
             ILogger<EntryControl> logger,
             IOptions<AppSettings> config
             )
