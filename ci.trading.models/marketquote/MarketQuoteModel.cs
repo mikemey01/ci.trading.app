@@ -24,7 +24,7 @@ namespace ci.trading.models.marketquote
         public decimal EarningsPerShare { get; set; }
         public decimal High { get; set; } // day high price
         public decimal LastTradeVolume { get; set; }
-        public decimal LastTradePrice { get; set; }
+        public decimal Last { get; set; }
         public decimal Low { get; set; } //day low price
         public string Name { get; set; }
         public decimal Open { get; set; } // day open price

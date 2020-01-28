@@ -146,7 +146,7 @@ namespace ci.trading.service.api.market
                     EarningsPerShare = quote.eps,
                     High = quote.hi,
                     LastTradeVolume = quote.incr_vl,
-                    LastTradePrice = quote.last,
+                    Last = quote.last,
                     Low = quote.lo,
                     Name = quote.name,
                     Open = quote.opn,

@@ -45,27 +45,30 @@ namespace ci.trading.service.controls
         {
             var httpClient = new HttpClient();
             // var accountInfo = await _accountService.CallApi(httpClient);
-            //var listSymbols = new List<string>
-            //{
-            //    "F",
-            //    "AMD",
-            //    "FB"
-            //};
-            //var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
+
+            /* current quote */
+            var listSymbols = new List<string>
+            {
+                "SPY",
+                "TYX",
+                "F"
+            };
+            var currentQuote = await _quoteService.CallApi(httpClient, listSymbols);
 
             //var date = new DateTime(2020, 1, 10);
             //var timeSales = await _timeSalesService.CallApi(httpClient, "5min", "F", date);
 
-            var topList = await _topListService.CallApi(httpClient, TopListType.topgainers);
-            var bottomList = await _topListService.CallApi(httpClient, TopListType.toplosers, ExchangeType.Q);
-            var sb = new StringBuilder();
+            /* top lists */
+            //var topList = await _topListService.CallApi(httpClient, TopListType.topgainers);
+            //var bottomList = await _topListService.CallApi(httpClient, TopListType.toplosers, ExchangeType.Q);
+            //var sb = new StringBuilder();
 
-            foreach (var item in bottomList)
-            {
-                sb.AppendLine($"Name: {item.CompanyName}({item.Symbol}), Percent decrease: {item.PercentChange}, last: {item.Last}");
-            }
+            //foreach (var item in bottomList)
+            //{
+            //    sb.AppendLine($"Name: {item.CompanyName}({item.Symbol}), Percent decrease: {item.PercentChange}, last: {item.Last}");
+            //}
 
-            _logger.LogInformation(sb.ToString());
+            //_logger.LogInformation(sb.ToString());
         }
     }
 }
